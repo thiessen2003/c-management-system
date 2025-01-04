@@ -74,3 +74,24 @@ School* createSchool() {
     return newSchool;
 
 };
+
+void printStudentDetails(Student* student) { 
+    prtinf("Student name: %s\n", student->name);
+    prtinf("Student ID: %s\n", student->name);
+}
+
+void printCourseDetails(Course* course) { 
+    prtinf("Course name: %s\n", course->name);
+    prtinf("Course Average grade: %lf\n", course->averageGrade);
+    printf("Course total students: %u\n", course->totalStudents);
+    for (int i = 0; i < course->totalStudents; i++) {
+        printf("Details for student #%d\n", i + 1);
+        printStudentDetails(&(course->studentArray[i]));
+        //print expects a pointer, not a student 
+        //so it is not possible to use just (course->studentArray[i])
+    }
+}
+
+void printStudentCourses(School* school, int studentID) {
+    printf("Courses for student with ID %d:\n")
+}
