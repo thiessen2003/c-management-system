@@ -39,8 +39,20 @@ Student* createStudent() {
 
 };
 
+void updateAverageGrade(Course* course) { 
+    double totalGrades = 0; 
+    for (int i = 0; i < course->totalStudents; i++) { 
+        totalGrades += (course->studentArray[i].grade);
+
+    }
+    course->averageGrade = totalGrades / course->totalStudents;
+}
+
 //creating a course
 Course* createCourse() {
+
+    double totalStudentsGrades = 0; 
+
     Course* newCourse = (Course*)malloc(sizeof(Course));
     printf("Enter student name: "); 
     scanf("%s", newCourse->name); //array decays to pointer
@@ -54,6 +66,7 @@ Course* createCourse() {
         newCourse->studentArray[i] = *newStudent;
         free(newStudent);
     }
+    updateAverageGrade(newCourse);
 
     return newCourse;
 
@@ -117,4 +130,38 @@ void printStudentsWhoFailed(Course* course, double cutOffGrade) {
         }
     }
 }
+
+void printCoursesWithPassAvgGrade(School* school, double cutOffGrade) { 
+    printf("Courses with pass average grade:\n");
+    for (int i = 0; i < school->totalCourses; i++) {
+        if (school -> courseArray[i].averageGrade >= cutOffGrade) {
+            printCourseDetails(&(school->courseArray[i]));
+        }
+    }
+} 
+
+void printAverageGradeAllCourses(School* school) { 
+    double totalGrade = 0; 
+    for (int i = 0; i < school -> totalCourses; i++) { 
+        totalGrade += (school->courseArray[i].averageGrade);
+    }
+    double average = totalGrade / school->totalCourses;
+    printf("Average grade between all the courses in school %s is %.2f\n", school->name, average);
+}
+
+void printCourseWithHighestAverage(School* school) { 
+    double highestAvg = 0; 
+    Course* highestAvgCourse = NULL; 
+    for (int i = 0; i < school -> totalCourses; i++) { 
+        if (school -> courseArray[i].averageGrade > highestAvg) {
+            highestAvg = school->courseArray[i].averageGrade;
+            highestAvgCourse = &(school->courseArray[i]);
+        }
+        printf("Course with the highest average grade:\n");
+        printCourseDetails(highestAvgCourse);
+    }
+
+}
+
+
 
