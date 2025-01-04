@@ -93,5 +93,13 @@ void printCourseDetails(Course* course) {
 }
 
 void printStudentCourses(School* school, int studentID) {
-    printf("Courses for student with ID %d:\n")
+    printf("Courses for student with ID %d:\n", studentID);
+    for (int i = 0; i < school->totalCourses; i++) { 
+        for (int j = 0; j < school->courseArray[i].totalStudents; j++) {
+            if (school->courseArray[i].studentArray[j].id == studentID) {
+                printf(" - %s\n", school->courseArray[i].name);
+                break; //if found, no need to still keep track
+            }
+        }
+    }
 }
