@@ -5,6 +5,7 @@
 typedef struct student {
     char name[20]; 
     unsigned int id; 
+    unsigned int grade;
 
 } Student;
 
@@ -31,6 +32,9 @@ Student* createStudent() {
     scanf("%s", newStudent->name); //array decays to pointer
     printf("Enter student ID: "); 
     scanf("%u", &(newStudent->id));
+    printf("Enter student grade: "); 
+    scanf("%u", &(newStudent->grade));
+
     return newStudent; 
 
 };
@@ -77,7 +81,8 @@ School* createSchool() {
 
 void printStudentDetails(Student* student) { 
     prtinf("Student name: %s\n", student->name);
-    prtinf("Student ID: %s\n", student->name);
+    prtinf("Student ID: %u\n", student->id);
+    prtinf("Student grade: %u\n", student->grade);
 }
 
 void printCourseDetails(Course* course) { 
@@ -103,3 +108,13 @@ void printStudentCourses(School* school, int studentID) {
         }
     }
 }
+
+void printStudentsWhoFailed(Course* course, double cutOffGrade) { 
+    printf("Students who failed in %s:\n", course->name);
+    for (int i = 0; i < course->totalStudents; i++) {
+        if (course -> studentArray[i].grade < cutOffGrade) {
+            printStudentDetails(&(course->studentArray[i]));
+        }
+    }
+}
+
