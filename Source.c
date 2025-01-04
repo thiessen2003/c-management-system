@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -164,4 +165,6 @@ void printCourseWithHighestAverage(School* school) {
 }
 
 
-
+int main() {
+    School* mySchool = createSchool(); 
+}
